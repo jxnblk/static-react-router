@@ -1,7 +1,7 @@
 {
   "name": "static-react-router",
-  "version": "1.0.1",
-  "description": "React static HTML generator for use with react-router-component",
+  "version": "1.0.2",
+  "description": "React static HTML generator for use with react-router",
   "author": "Brent Jackson",
   "license": "MIT",
   "main": "build.js",
