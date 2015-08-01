@@ -2,10 +2,11 @@
 
 var _ = require('lodash');
 var fs = require('fs');
+var mkdirp = require('mkdirp');
 var path = require('path');
 var React = require('react');
 var Router = require('react-router');
-require('node-jsx').install();
+require('node-jsx').install({extension: '.jsx'});
 
 var routes = require('./routes.jsx');
 
@@ -35,15 +36,15 @@ module.exports = function(options) {
       });
     */
   // - Add custom <head> options to react-html
-  // - Map links to baseUrl? 
+  // - Map links to baseUrl?
 
   options.routes.map(function(route, i) {
     Router.run(routes(options), options.baseUrl + route.path, function(Handler, state) {
       var html = React.renderToString(React.createElement(Handler, options.props));
       //var dir = path.join(__dirname, options.dest + route.path + '/');
-      var dir = path.join(options.dest, route.path); 
+      var dir = path.join(options.dest, route.path);
       if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir);
+        mkdirp.sync(dir);
       }
       var filename = path.join(dir, 'index.html');
       fs.writeFileSync(filename, html);
